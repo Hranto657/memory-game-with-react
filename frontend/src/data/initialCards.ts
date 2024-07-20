@@ -1,0 +1,88 @@
+import { CardType } from '@/types/commonTypes';
+
+export const initialCards: CardType[] = [
+  {
+    id: 1,
+    image: 'https://loremflickr.com/200/300/paris,girl/all',
+    alt: 'card with girl on front',
+    isFlipped: false,
+    isMatched: false,
+  },
+  {
+    id: 2,
+    image: 'https://loremflickr.com/200/300/paris,girl/all',
+    alt: 'card with girl on front',
+    isFlipped: false,
+    isMatched: false,
+  },
+  {
+    id: 3,
+    image: 'https://loremflickr.com/320/240/brazil,rio',
+    alt: 'card with brazil on front',
+    isFlipped: false,
+    isMatched: false,
+  },
+  {
+    id: 4,
+    image: 'https://loremflickr.com/320/240/brazil,rio',
+    alt: 'card with brazil on front',
+    isFlipped: false,
+    isMatched: false,
+  },
+  {
+    id: 5,
+    image: 'https://loremflickr.com/200/300/dog',
+    alt: 'card with animal on front',
+    isFlipped: false,
+    isMatched: false,
+  },
+  {
+    id: 6,
+    image: 'https://loremflickr.com/200/300/dog',
+    alt: 'card with animal on front',
+    isFlipped: false,
+    isMatched: false,
+  },
+  {
+    id: 7,
+    image: 'https://loremflickr.com/200/300/cat',
+    alt: 'card with animal on front',
+    isFlipped: false,
+    isMatched: false,
+  },
+  {
+    id: 8,
+    image: 'https://loremflickr.com/200/300/cat',
+    alt: 'card with animal on front',
+    isFlipped: false,
+    isMatched: false,
+  },
+  {
+    id: 9,
+    image: 'https://loremflickr.com/200/300/rabbit',
+    alt: 'card with animal on front',
+    isFlipped: false,
+    isMatched: false,
+  },
+  {
+    id: 10,
+    image: 'https://loremflickr.com/200/300/rabbit',
+    alt: 'card with animal on front',
+    isFlipped: false,
+    isMatched: false,
+  },
+  {
+    id: 11,
+    image: 'https://loremflickr.com/200/300/bird',
+    alt: 'card with animal on front',
+    isFlipped: false,
+    isMatched: false,
+  },
+  {
+    id: 12,
+    image: 'https://loremflickr.com/200/300/bird',
+    alt: 'card with animal on front',
+    isFlipped: false,
+    isMatched: false,
+  },
+];
