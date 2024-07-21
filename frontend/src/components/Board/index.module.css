@@ -34,6 +34,12 @@
   align-items: center;
   gap: 20px;
 }
+.auth_block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
 
 @media (max-width: 1024px) {
   .board {

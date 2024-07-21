@@ -4,6 +4,8 @@ import { initialCards } from '@/data/initialCards';
 import { CardType } from '@/types/commonTypes';
 import GameInfo from './GameInfo';
 import Card from './Card';
+import Login from '../Login';
+import Register from '../Register';
 
 import styles from './index.module.css';
 
@@ -98,6 +100,10 @@ export default function Board() {
         <button className={styles.gamePause__button} onClick={pauseGame} disabled={!isStarted}>
           Pause Game
         </button>
+      </div>
+      <div className={styles.auth_block}>
+        <Login />
+        <Register />
       </div>
       <div className={styles.board}>
         {cards.map((card) => (
