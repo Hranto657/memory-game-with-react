@@ -16,6 +16,25 @@
   max-width: 700px;
 }
 
+.gameStart__button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.gamePause__button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.gameState__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 @media (max-width: 1024px) {
   .board {
     grid-template-columns: repeat(3, 1fr);

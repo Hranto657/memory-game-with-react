@@ -10,13 +10,14 @@ import styles from './index.module.css';
 export default function Board() {
   const [cards, setCards] = useState<CardType[]>(initialCards);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
 
   const flippedCards = cards.filter((card) => card.isFlipped).map((card) => card.id);
 
   const matchedCards = useMemo(() => cards.filter((card) => card.isMatched), [cards]);
 
   const handleCardClick = (id: number) => {
-    if (isDisabled || flippedCards.includes(id) || matchedCards.find((card) => card.id === id)) {
+    if (isDisabled || flippedCards.includes(id) || matchedCards.find((card) => card.id === id) || !isStarted) {
       return;
     }
 
@@ -39,8 +40,16 @@ export default function Board() {
     }));
     setCards(shuffleCards(resetCards));
     setIsDisabled(false);
+    setIsStarted(false);
   }, [shuffleCards]);
 
+  const startGame = () => {
+    setIsStarted(true);
+  };
+
+  const pauseGame = () => {
+    setIsStarted(false);
+  };
   useEffect(() => {
     resetGame();
   }, [resetGame]);
@@ -82,6 +91,14 @@ export default function Board() {
   return (
     <div className={styles.main}>
       <h1>Memory Game</h1>
+      <div className={styles.gameState__button}>
+        <button className={styles.gameStart__button} onClick={startGame} disabled={isStarted}>
+          Start Game
+        </button>
+        <button className={styles.gamePause__button} onClick={pauseGame} disabled={!isStarted}>
+          Pause Game
+        </button>
+      </div>
       <div className={styles.board}>
         {cards.map((card) => (
           <Card
