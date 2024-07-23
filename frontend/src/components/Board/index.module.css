@@ -8,46 +8,15 @@
 }
 
 .board {
+  max-width: 700px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
   gap: 10px;
-  justify-content: center;
   margin: 20px;
-  max-width: 700px;
 }
 
-.gameStart__button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.gamePause__button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.gameState__button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-.auth_block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-
-@media (max-width: 1024px) {
-  .board {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
+@media (max-width: 480px) {
   .board {
     grid-template-columns: repeat(2, 1fr);
   }

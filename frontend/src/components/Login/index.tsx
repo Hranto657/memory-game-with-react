@@ -3,6 +3,7 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { FormValues } from './types';
 import Modal from '../Modal';
 import Input from '../Input';
+import Button from '../Button';
 
 import styles from './index.module.css';
 
@@ -26,9 +27,7 @@ export default function Login() {
   };
   return (
     <>
-      <button className={styles.button} onClick={openModal}>
-        Sign In
-      </button>
+      <Button onClick={openModal}>Login</Button>
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <h1 className={styles.title}>Login Form</h1>
         <FormProvider {...methods}>
@@ -55,7 +54,7 @@ export default function Login() {
             />
 
             <div className={styles.form_button_block}>
-              <input className={styles.form_button} type="submit" />
+              <input className={styles.form_button} type="submit" value="Login" />
               <input className={styles.form_button} type="button" onClick={() => reset()} value="reset" />
             </div>
           </form>

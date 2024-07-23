@@ -6,6 +6,7 @@ import GameInfo from './GameInfo';
 import Card from './Card';
 import Login from '../Login';
 import Register from '../Register';
+import Button from '../Button';
 
 import styles from './index.module.css';
 
@@ -93,18 +94,14 @@ export default function Board() {
   return (
     <div className={styles.main}>
       <h1>Memory Game</h1>
-      <div className={styles.gameState__button}>
-        <button className={styles.gameStart__button} onClick={startGame} disabled={isStarted}>
-          Start Game
-        </button>
-        <button className={styles.gamePause__button} onClick={pauseGame} disabled={!isStarted}>
-          Pause Game
-        </button>
-      </div>
-      <div className={styles.auth_block}>
-        <Login />
-        <Register />
-      </div>
+      <Button onClick={startGame} disabled={isStarted}>
+        Start Game
+      </Button>
+      <Button onClick={pauseGame} disabled={!isStarted}>
+        Pause Game
+      </Button>
+      <Login />
+      <Register />
       <div className={styles.board}>
         {cards.map((card) => (
           <Card
