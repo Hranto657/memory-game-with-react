@@ -6,6 +6,9 @@
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  color: #242424;
 }
 .form_button_block {
   display: flex;
@@ -22,5 +25,6 @@
   border: none;
   border-radius: 4px;
   color: #242424;
+  background-color: #fff;
   cursor: pointer;
 }

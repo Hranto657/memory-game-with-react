@@ -4,7 +4,7 @@ import { IInputProps } from './types';
 
 import styles from './index.module.css';
 
-const Input = ({ name, rules, ...rest }: IInputProps) => {
+export default function Input({ name, rules, ...rest }: IInputProps) {
   const {
     register,
     formState: { errors },
@@ -16,6 +16,4 @@ const Input = ({ name, rules, ...rest }: IInputProps) => {
       {errors[name] && <p className={styles.error_message}>{(errors[name] as FieldError).message}</p>}
     </div>
   );
-};
-
-export default Input;
+}

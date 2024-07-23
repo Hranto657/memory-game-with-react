@@ -4,7 +4,7 @@ import icon from '@/assets/close-icon.svg';
 
 import styles from './index.module.css';
 
-const Modal = ({ isOpen, onClose, children }: IModalItemProps) => {
+export default function Modal({ isOpen, onClose, children }: IModalItemProps) {
   if (!isOpen) return null;
 
   return (
@@ -13,12 +13,10 @@ const Modal = ({ isOpen, onClose, children }: IModalItemProps) => {
         <div className={styles.modal_content}>
           {children}
           <button className={styles.modal_close_btn} onClick={onClose}>
-            <img src={icon} alt="Close Icon" />
+            <img className={styles.modal_close_btn_img} src={icon} alt="Close Icon" />
           </button>
         </div>
       </div>
     </div>
   );
-};
-
-export default Modal;
+}

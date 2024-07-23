@@ -3,6 +3,7 @@ import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { FormValues } from './types';
 import Modal from '../Modal';
 import Input from '../Input';
+import Button from '../Button';
 
 import styles from './index.module.css';
 
@@ -29,9 +30,7 @@ export default function Register() {
 
   return (
     <>
-      <button className={styles.button} onClick={openModal}>
-        Sign Up
-      </button>
+      <Button onClick={openModal}>Register</Button>
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <h1 className={styles.title}>Register Form</h1>
         <FormProvider {...methods}>
@@ -85,7 +84,7 @@ export default function Register() {
             />
 
             <div className={styles.form_button_block}>
-              <input className={styles.form_button} type="submit" />
+              <input className={styles.form_button} type="submit" value="submit" />
               <input className={styles.form_button} type="button" onClick={() => reset()} value="reset" />
             </div>
           </form>

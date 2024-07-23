@@ -3,15 +3,23 @@ import { ICard } from './types';
 
 import styles from './index.module.css';
 
-export default function Card({ id, image, alt, isFlipped, isMatched, onClick }: ICard) {
+const Card = ({ id, image, alt, isFlipped, isMatched, onClick }: ICard) => {
+  const handleClick = () => {
+    if (!isFlipped && !isMatched) {
+      onClick(id);
+    }
+  };
+
   return (
-    <div className={`${styles.card} ${isFlipped || isMatched ? styles.flipped : ''}`} onClick={() => onClick(id)}>
-      <div className={styles.cardInner}>
-        <div className={styles.cardFront}>
-          <img className={styles.cardFront__img} src={image} alt={alt} />
+    <div className={`${styles.card} ${isFlipped || isMatched ? styles.flipped : ''}`} onClick={handleClick}>
+      <div className={styles.card_inner}>
+        <div className={styles.card_front}>
+          <img className={styles.card_front_img} src={image} alt={alt} />
         </div>
-        <div className={styles.cardBack}></div>
+        <div className={styles.card_back} />
       </div>
     </div>
   );
-}
+};
+
+export default React.memo(Card);
