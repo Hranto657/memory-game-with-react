@@ -1,6 +1,6 @@
 .card {
-  width: 150px;
-  height: 200px;
+  width: 85px;
+  height: 120px;
   perspective: 1000px;
   cursor: pointer;
 }
@@ -32,6 +32,7 @@
 
 .card_front {
   transform: rotateY(180deg);
+  z-index: 2;
 }
 
 .card_front_img {
@@ -41,5 +42,16 @@
 }
 
 .card_back {
-  background: black;
+  background: rgba(74, 74, 74, 1);
+  z-index: 1;
+}
+
+.card_back_img {
+  object-fit: cover;
+}
+
+@media (max-width: 360px) {
+  .card {
+    width: 80px;
+  }
 }

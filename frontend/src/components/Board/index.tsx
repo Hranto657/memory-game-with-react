@@ -2,10 +2,9 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { shuffleCards } from '@/helpers/shuffleCards';
 import { initialCards } from '@/data/initialCards';
 import { CardType } from '@/types/commonTypes';
-import GameInfo from './GameInfo';
 import Card from './Card';
-import Login from '../Login';
-import Register from '../Register';
+// import Login from '../Login';
+// import Register from '../Register';
 import Button from '../Button';
 
 import styles from './index.module.css';
@@ -58,7 +57,7 @@ export default function Board() {
   }, [resetGame]);
 
   useEffect(() => {
-    if (matchedCards.length === 12) {
+    if (matchedCards.length === 16) {
       alert('You win');
       resetGame();
     }
@@ -93,15 +92,15 @@ export default function Board() {
 
   return (
     <div className={styles.main}>
-      <h1>Memory Game</h1>
-      <Button onClick={startGame} disabled={isStarted}>
-        Start Game
-      </Button>
-      <Button onClick={pauseGame} disabled={!isStarted}>
-        Pause Game
-      </Button>
-      <Login />
-      <Register />
+      <div className={styles.title}>
+        <h1>Memory Game</h1>
+      </div>
+
+      <div className={styles.header}>
+        <p>Matched Pairs: {matchedCards.length / 2}</p>
+        <p>Score: 0</p>
+      </div>
+
       <div className={styles.board}>
         {cards.map((card) => (
           <Card
@@ -115,7 +114,22 @@ export default function Board() {
           />
         ))}
       </div>
-      <GameInfo matchedCards={matchedCards} onReset={resetGame} />
+      <div className={styles.timer}>
+        <p>00:00</p>
+      </div>
+      <div className={styles.footer_buttons_block}>
+        <Button onClick={startGame} disabled={isStarted}>
+          Start Game
+        </Button>
+        <Button onClick={pauseGame} disabled={!isStarted}>
+          Pause Game
+        </Button>
+        <Button onClick={resetGame}>Reset Game</Button>
+      </div>
+      {/* <div className={styles.auth_buttons_block}>
+        <Login />
+        <Register />
+      </div> */}
     </div>
   );
 }
