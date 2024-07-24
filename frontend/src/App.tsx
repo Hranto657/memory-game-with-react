@@ -1,8 +1,13 @@
 import React from 'react';
+import Container from './components/Container';
 import Board from './components/Board';
 
 function App() {
-  return <Board />;
+  return (
+    <Container>
+      <Board />
+    </Container>
+  );
 }
 
 export default App;
