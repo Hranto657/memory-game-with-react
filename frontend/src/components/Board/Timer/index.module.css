@@ -1,0 +1,21 @@
+.timer {
+  margin-top: 20px;
+  padding: 4px 27px;
+  border-radius: 16px;
+  background: rgba(74, 74, 74, 1);
+  box-shadow: 0 0 20px rgba(50, 201, 183, 0.25);
+}
+.timer p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+}
+.footer_buttons_block {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+}
