@@ -1,94 +1,63 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { shuffleCards } from '@/helpers/shuffleCards';
-import { initialCards } from '@/data/initialCards';
 import { CardType } from '@/types/commonTypes';
+import { initialCards } from '@/data/initialCards';
 import Card from './Card';
+import Timer from './Timer';
 // import Login from '../Login';
 // import Register from '../Register';
-import Button from '../Button';
 
 import styles from './index.module.css';
 
 export default function Board() {
   const [cards, setCards] = useState<CardType[]>(initialCards);
-  const [isDisabled, setIsDisabled] = useState(false);
-  const [isStarted, setIsStarted] = useState(false);
+  const [isCardDisabled, setIsCardDisabled] = useState(false);
+  const [isGameStarted, setIsGameStarted] = useState(false);
 
-  const flippedCards = cards.filter((card) => card.isFlipped).map((card) => card.id);
-
+  const flippedCards = useMemo(() => cards.filter((card) => card.isFlipped).map((card) => card.id), [cards]);
   const matchedCards = useMemo(() => cards.filter((card) => card.isMatched), [cards]);
 
-  const handleCardClick = (id: number) => {
-    if (isDisabled || flippedCards.includes(id) || matchedCards.find((card) => card.id === id) || !isStarted) {
-      return;
-    }
+  const handleCardClick = useCallback(
+    (id: number) => {
+      if (
+        isCardDisabled ||
+        flippedCards.includes(id) ||
+        matchedCards.find((card) => card.id === id) ||
+        !isGameStarted
+      ) {
+        return;
+      }
 
-    const flipCard = cards.find((card) => card.id === id);
-
-    if (!flipCard) {
-      return;
-    }
-
-    flipCard.isFlipped = true;
-
-    setCards([...cards]);
-  };
-
-  const resetGame = useCallback(() => {
-    const resetCards = initialCards.map((card) => ({
-      ...card,
-      isFlipped: false,
-      isMatched: false,
-    }));
-    setCards(shuffleCards(resetCards));
-    setIsDisabled(false);
-    setIsStarted(false);
-  }, [shuffleCards]);
-
-  const startGame = () => {
-    setIsStarted(true);
-  };
-
-  const pauseGame = () => {
-    setIsStarted(false);
-  };
-  useEffect(() => {
-    resetGame();
-  }, [resetGame]);
-
-  useEffect(() => {
-    if (matchedCards.length === 16) {
-      alert('You win');
-      resetGame();
-    }
-  }, [matchedCards, resetGame]);
+      setCards((prevCards) => {
+        const updatedCards = prevCards.map((card) => (card.id === id ? { ...card, isFlipped: true } : card));
+        return updatedCards;
+      });
+    },
+    [isCardDisabled, flippedCards, matchedCards, isGameStarted]
+  );
 
   useEffect(() => {
     if (flippedCards.length === 2) {
-      setIsDisabled(true);
+      setIsCardDisabled(true);
 
       const [firstId, secondId] = flippedCards;
       const firstCard = cards.find((card) => card.id === firstId);
       const secondCard = cards.find((card) => card.id === secondId);
 
-      if (firstCard.image === secondCard.image) {
-        setCards(
-          cards.map((card) =>
-            card.id === firstId || card.id === secondId
-              ? { ...card, isMatched: true, isFlipped: false }
-              : { ...card, isFlipped: false }
+      if (firstCard?.image === secondCard?.image) {
+        setCards((prevCards) =>
+          prevCards.map((card) =>
+            card.id === firstId || card.id === secondId ? { ...card, isMatched: true, isFlipped: false } : card
           )
         );
-        setIsDisabled(false);
+        setIsCardDisabled(false);
       } else {
         setTimeout(() => {
-          const newCards = cards.map((card) => ({ ...card, isFlipped: false }));
-          setCards(newCards);
-          setIsDisabled(false);
+          setCards((prevCards) => prevCards.map((card) => ({ ...card, isFlipped: false })));
+          setIsCardDisabled(false);
         }, 1000);
       }
     }
-  }, [cards, flippedCards, resetGame]);
+  }, [flippedCards, cards]);
 
   return (
     <div className={styles.main}>
@@ -114,18 +83,14 @@ export default function Board() {
           />
         ))}
       </div>
-      <div className={styles.timer}>
-        <p>00:00</p>
-      </div>
-      <div className={styles.footer_buttons_block}>
-        <Button onClick={startGame} disabled={isStarted}>
-          Start Game
-        </Button>
-        <Button onClick={pauseGame} disabled={!isStarted}>
-          Pause Game
-        </Button>
-        <Button onClick={resetGame}>Reset Game</Button>
-      </div>
+      <Timer
+        isGameStarted={isGameStarted}
+        setCards={setCards}
+        setIsGameStarted={setIsGameStarted}
+        setIsCardDisabled={setIsCardDisabled}
+        matchedCards={matchedCards}
+        flippedCards={flippedCards}
+      />
       {/* <div className={styles.auth_buttons_block}>
         <Login />
         <Register />
