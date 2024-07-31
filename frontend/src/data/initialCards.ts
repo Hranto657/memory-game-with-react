@@ -7,6 +7,16 @@ import dragon5 from '@/assets/dragon-5.jpg';
 import dragon6 from '@/assets/dragon-6.jpg';
 import dragon7 from '@/assets/dragon-7.jpg';
 import dragon8 from '@/assets/dragon-8.jpg';
+import dragon9 from '@/assets/dragon-9.jpg';
+import dragon10 from '@/assets/dragon-10.jpg';
+import dragon11 from '@/assets/dragon-11.jpg';
+import dragon12 from '@/assets/dragon-12.jpg';
+import dragon13 from '@/assets/dragon-13.jpg';
+import dragon14 from '@/assets/dragon-14.jpg';
+import dragon15 from '@/assets/dragon-15.jpg';
+import dragon16 from '@/assets/dragon-16.jpg';
+import dragon17 from '@/assets/dragon-17.jpg';
+import joker from '@/assets/joker.jpg';
 
 export const initialCards: CardType[] = [
   {
@@ -15,6 +25,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 2,
@@ -22,6 +33,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 3,
@@ -29,6 +41,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 4,
@@ -36,6 +49,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 5,
@@ -43,6 +57,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 6,
@@ -50,6 +65,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 7,
@@ -57,6 +73,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 8,
@@ -64,6 +81,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 9,
@@ -71,6 +89,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 10,
@@ -78,6 +97,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 11,
@@ -85,6 +105,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 12,
@@ -92,6 +113,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 13,
@@ -99,6 +121,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 14,
@@ -106,6 +129,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 15,
@@ -113,6 +137,7 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
   },
   {
     id: 16,
@@ -120,5 +145,166 @@ export const initialCards: CardType[] = [
     alt: 'memory game card',
     isFlipped: false,
     isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 17,
+    image: joker,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: true,
+  },
+  {
+    id: 18,
+    image: joker,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: true,
+  },
+  {
+    id: 19,
+    image: dragon9,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 20,
+    image: dragon9,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 21,
+    image: dragon10,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 22,
+    image: dragon10,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 23,
+    image: dragon11,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 24,
+    image: dragon11,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 25,
+    image: dragon12,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 26,
+    image: dragon12,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 27,
+    image: dragon13,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 28,
+    image: dragon13,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 29,
+    image: dragon14,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 30,
+    image: dragon14,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 31,
+    image: dragon15,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 32,
+    image: dragon15,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 33,
+    image: dragon16,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 34,
+    image: dragon16,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 35,
+    image: dragon17,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+  },
+  {
+    id: 36,
+    image: dragon17,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
   },
 ];

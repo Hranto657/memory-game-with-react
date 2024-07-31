@@ -4,4 +4,5 @@ export type CardType = {
   alt: string;
   isFlipped: boolean;
   isMatched: boolean;
+  isJoker: boolean;
 };
