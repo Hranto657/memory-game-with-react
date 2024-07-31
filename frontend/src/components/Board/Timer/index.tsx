@@ -15,8 +15,7 @@ const Timer = ({
   matchedCards,
   flippedCards,
 }: ITimerProps) => {
-  console.log(isGameStarted);
-  const [time, setTime] = useState(60);
+  const [time, setTime] = useState(300);
   const [timer, setTimer] = useState<number | null>(null);
 
   const startGame = () => {
@@ -76,7 +75,7 @@ const Timer = ({
       clearInterval(timer);
       setTimer(null);
     }
-    setTime(30);
+    setTime(300);
   };
 
   useEffect(() => {
@@ -84,12 +83,10 @@ const Timer = ({
   }, []);
 
   useEffect(() => {
-    if (matchedCards.length === 16) {
+    if (matchedCards.length === 34) {
       alert('You win');
-      setTimeout(() => {
-        pauseGame();
-        resetGame();
-      }, 1000);
+      pauseGame();
+      resetGame();
     }
   }, [matchedCards]);
 
