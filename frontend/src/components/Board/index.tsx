@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { CardType } from '@/types/commonTypes';
 import { initialCards } from '@/data/initialCards';
+import { shuffleCards } from '@/helpers/shuffleCards';
 import Card from './Card';
 import Timer from './Timer';
 // import Login from '../Login';
@@ -43,13 +44,29 @@ export default function Board() {
       const firstCard = cards.find((card) => card.id === firstId);
       const secondCard = cards.find((card) => card.id === secondId);
 
+      if (firstCard.isJoker || secondCard.isJoker) {
+        setTimeout(() => {
+          setCards((prevCards) => shuffleCards(prevCards.map((card) => ({ ...card, isFlipped: false }))));
+          setIsCardDisabled(false);
+        }, 1000);
+      }
+
       if (firstCard?.image === secondCard?.image) {
-        setCards((prevCards) =>
-          prevCards.map((card) =>
-            card.id === firstId || card.id === secondId ? { ...card, isMatched: true, isFlipped: false } : card
-          )
-        );
-        setIsCardDisabled(false);
+        if (firstCard.isJoker && secondCard.isJoker) {
+          setTimeout(() => {
+            setCards((prevCards) =>
+              shuffleCards(prevCards.map((card) => ({ ...card, isFlipped: false, isMatched: false })))
+            );
+            setIsCardDisabled(false);
+          }, 1000);
+        } else {
+          setCards((prevCards) =>
+            prevCards.map((card) =>
+              card.id === firstId || card.id === secondId ? { ...card, isMatched: true, isFlipped: false } : card
+            )
+          );
+          setIsCardDisabled(false);
+        }
       } else {
         setTimeout(() => {
           setCards((prevCards) => prevCards.map((card) => ({ ...card, isFlipped: false })));
