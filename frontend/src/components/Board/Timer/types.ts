@@ -6,6 +6,7 @@ export interface ITimerProps {
   setCards: Dispatch<SetStateAction<CardType[]>>;
   setIsGameStarted: Dispatch<SetStateAction<boolean>>;
   setIsCardDisabled: Dispatch<SetStateAction<boolean>>;
+  level: number;
   matchedCards: CardType[];
   flippedCards: number[];
 }
