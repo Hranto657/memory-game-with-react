@@ -1,5 +1,6 @@
-// Fisher-Yates shuffle or Knuth shuffle
-export const shuffleCards = (cards) => {
+import { CardType } from '@/types/commonTypes';
+
+export const shuffleCards = (cards: CardType[]) => {
   const newCards = [...cards];
 
   for (let i = newCards.length - 1; i > 0; i--) {
