@@ -1,16 +1,19 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { CardType } from '@/types/commonTypes';
 import { initialCards } from '@/data/initialCards';
 import { shuffleCards } from '@/helpers/shuffleCards';
-import Card from './Card';
+import { getRequiredMatches } from './functions';
 import Timer from './Timer';
+import GameBoard from './GameBoard';
 // import Login from '../Login';
 // import Register from '../Register';
 
 import styles from './index.module.css';
 
 export default function Board() {
-  const [cards, setCards] = useState<CardType[]>(initialCards);
+  const { level } = useParams();
+  const [cards, setCards] = useState<CardType[]>([]);
   const [isCardDisabled, setIsCardDisabled] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
 
@@ -35,6 +38,35 @@ export default function Board() {
     },
     [isCardDisabled, flippedCards, matchedCards, isGameStarted]
   );
+
+  const getCardsForLevel = (level: number) => {
+    const pairs = getRequiredMatches(level) / 2;
+    let shuffledCards = shuffleCards(initialCards.filter((card) => !card.isJoker));
+    let selectedCards = shuffledCards.slice(0, pairs);
+
+    let duplicatedCards = selectedCards.map((card) => ({
+      ...card,
+      id: card.id + 100,
+    }));
+    let levelCards = [...selectedCards, ...duplicatedCards];
+
+    if (level >= 4) {
+      const initialJokers = initialCards.filter((card) => card.isJoker);
+
+      if (initialJokers.length > 0) {
+        const joker = initialJokers[0];
+
+        let duplicatedJokers = [joker, { ...joker, id: joker.id + 100 }];
+
+        levelCards = [...levelCards, ...duplicatedJokers];
+      }
+    }
+    return shuffleCards(levelCards);
+  };
+
+  useEffect(() => {
+    setCards(shuffleCards(getCardsForLevel(Number(level))));
+  }, [level]);
 
   useEffect(() => {
     if (flippedCards.length === 2) {
@@ -87,24 +119,13 @@ export default function Board() {
         <p>Score: 0</p>
       </div>
 
-      <div className={styles.board}>
-        {cards.map((card) => (
-          <Card
-            key={card.id}
-            id={card.id}
-            image={card.image}
-            alt={card.alt}
-            isFlipped={card.isFlipped}
-            isMatched={card.isMatched}
-            onClick={handleCardClick}
-          />
-        ))}
-      </div>
+      <GameBoard level={Number(level)} cards={cards} handleCardClick={handleCardClick} />
       <Timer
         isGameStarted={isGameStarted}
         setCards={setCards}
         setIsGameStarted={setIsGameStarted}
         setIsCardDisabled={setIsCardDisabled}
+        level={Number(level)}
         matchedCards={matchedCards}
         flippedCards={flippedCards}
       />
