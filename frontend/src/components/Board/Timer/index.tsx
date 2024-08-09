@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CardType } from '@/types/commonTypes';
 import { ITimerProps } from './types';
 import { formatTime } from '@/helpers/formateTime';
 import { shuffleCards } from '@/helpers/shuffleCards';
+import { getTimeForLevel, pauseTimer, resetTimer, startTimer } from './functions';
+import { getRequiredMatches } from '../functions';
 import Button from '@/components/Button';
 
 import styles from './index.module.css';
@@ -12,20 +15,22 @@ const Timer = ({
   setIsGameStarted,
   setCards,
   setIsCardDisabled,
+  level,
   matchedCards,
   flippedCards,
 }: ITimerProps) => {
-  const [time, setTime] = useState(300);
+  const navigate = useNavigate();
+  const [time, setTime] = useState(getTimeForLevel(level));
   const [timer, setTimer] = useState<number | null>(null);
 
   const startGame = () => {
     setIsGameStarted(true);
-    startTimer();
+    startTimer(setTime, setTimer, timer, resetGame);
   };
 
   const pauseGame = () => {
     setIsGameStarted(false);
-    pauseTimer();
+    pauseTimer(timer, setTimer);
   };
 
   const resetGame = () => {
@@ -43,53 +48,28 @@ const Timer = ({
 
     setIsCardDisabled(false);
     setIsGameStarted(false);
-    resetTimer();
-  };
-
-  const startTimer = () => {
-    if (timer) return;
-    const newTimer = setInterval(() => {
-      setTime((prevTime) => {
-        if (prevTime === 1) {
-          clearInterval(newTimer);
-          setTimer(null);
-          alert('Game Over');
-          resetGame();
-          return 0;
-        }
-        return prevTime - 1;
-      });
-    }, 1000);
-    setTimer(newTimer);
-  };
-
-  const pauseTimer = () => {
-    if (timer) {
-      clearInterval(timer);
-      setTimer(null);
-    }
-  };
-
-  const resetTimer = () => {
-    if (timer) {
-      clearInterval(timer);
-      setTimer(null);
-    }
-    setTime(300);
+    resetTimer(timer, setTimer);
+    setTime(getTimeForLevel(level));
   };
 
   useEffect(() => {
-    resetGame();
-  }, []);
-
-  useEffect(() => {
-    if (matchedCards.length === 34) {
+    const requiredMatches = level > 4 ? getRequiredMatches(Number(level)) - 2 : getRequiredMatches(Number(level));
+    if (matchedCards.length === requiredMatches) {
       alert('You win');
-      pauseGame();
-      resetGame();
+      const nextLevel = Number(level) + 1;
+      if (nextLevel < 7) {
+        navigate(`/level/${nextLevel}`);
+        pauseGame();
+        setTime(getTimeForLevel(nextLevel));
+      } else {
+        alert('Congratulations! You have completed all levels.');
+        navigate('/level/1');
+        console.log(level, '0');
+        pauseGame();
+        setTime(getTimeForLevel(1));
+      }
     }
-  }, [matchedCards]);
-
+  }, [matchedCards, level, navigate]);
   return (
     <>
       <div className={styles.timer}>
