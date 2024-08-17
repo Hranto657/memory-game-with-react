@@ -30,7 +30,9 @@ export default function Register() {
 
   return (
     <>
-      <Button onClick={openModal}>Register</Button>
+      <Button onClick={openModal} className={styles.button}>
+        Register
+      </Button>
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <h1 className={styles.title}>Register Form</h1>
         <FormProvider {...methods}>
