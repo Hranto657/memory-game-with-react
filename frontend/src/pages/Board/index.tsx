@@ -4,10 +4,8 @@ import { CardType } from '@/types/commonTypes';
 import { initialCards } from '@/data/initialCards';
 import { shuffleCards } from '@/helpers/shuffleCards';
 import { getRequiredMatches } from './functions';
-import Timer from './Timer';
-import GameBoard from './GameBoard';
-// import Login from '../Login';
-// import Register from '../Register';
+import Timer from '@/components/Board/Timer';
+import GameBoard from '@/components/Board/GameBoard';
 
 import styles from './index.module.css';
 
@@ -50,7 +48,7 @@ export default function Board() {
     }));
     let levelCards = [...selectedCards, ...duplicatedCards];
 
-    if (level >= 4) {
+    if (level >= 2) {
       const initialJokers = initialCards.filter((card) => card.isJoker);
 
       if (initialJokers.length > 0) {
@@ -119,7 +117,7 @@ export default function Board() {
         <p>Score: 0</p>
       </div>
 
-      <GameBoard level={Number(level)} cards={cards} handleCardClick={handleCardClick} />
+      <GameBoard cards={cards} handleCardClick={handleCardClick} />
       <Timer
         isGameStarted={isGameStarted}
         setCards={setCards}
@@ -128,11 +126,8 @@ export default function Board() {
         level={Number(level)}
         matchedCards={matchedCards}
         flippedCards={flippedCards}
+        getRequiredMatches={getRequiredMatches}
       />
-      {/* <div className={styles.auth_buttons_block}>
-        <Login />
-        <Register />
-      </div> */}
     </div>
   );
 }
