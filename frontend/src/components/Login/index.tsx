@@ -27,7 +27,9 @@ export default function Login() {
   };
   return (
     <>
-      <Button onClick={openModal}>Login</Button>
+      <Button onClick={openModal} className={styles.button}>
+        Login
+      </Button>
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <h1 className={styles.title}>Login Form</h1>
         <FormProvider {...methods}>
