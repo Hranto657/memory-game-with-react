@@ -1,13 +1,12 @@
 import React from 'react';
 import { IGameBoardProps } from './types';
-import { getColumns } from './functions';
 import Card from '../Card';
 
 import styles from './index.module.css';
 
-const GameBoard = ({ level, cards, handleCardClick }: IGameBoardProps) => {
+const GameBoard = ({ cards, handleCardClick }: IGameBoardProps) => {
   return (
-    <div className={styles.board} style={{ gridTemplateColumns: getColumns(level) }}>
+    <div className={styles.board}>
       {cards.map((card) => (
         <Card
           key={card.id}
@@ -17,7 +16,6 @@ const GameBoard = ({ level, cards, handleCardClick }: IGameBoardProps) => {
           isFlipped={card.isFlipped}
           isMatched={card.isMatched}
           onClick={handleCardClick}
-          level={level}
         />
       ))}
     </div>
