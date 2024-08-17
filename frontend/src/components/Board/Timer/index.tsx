@@ -5,7 +5,6 @@ import { ITimerProps } from './types';
 import { formatTime } from '@/helpers/formateTime';
 import { shuffleCards } from '@/helpers/shuffleCards';
 import { getTimeForLevel, pauseTimer, resetTimer, startTimer } from './functions';
-import { getRequiredMatches } from '../functions';
 import Button from '@/components/Button';
 
 import styles from './index.module.css';
@@ -18,6 +17,7 @@ const Timer = ({
   level,
   matchedCards,
   flippedCards,
+  getRequiredMatches,
 }: ITimerProps) => {
   const navigate = useNavigate();
   const [time, setTime] = useState(getTimeForLevel(level));
@@ -53,18 +53,17 @@ const Timer = ({
   };
 
   useEffect(() => {
-    const requiredMatches = level > 4 ? getRequiredMatches(Number(level)) - 2 : getRequiredMatches(Number(level));
+    const requiredMatches = getRequiredMatches(Number(level));
     if (matchedCards.length === requiredMatches) {
       alert('You win');
       const nextLevel = Number(level) + 1;
-      if (nextLevel < 7) {
-        navigate(`/level/${nextLevel}`);
+      if (nextLevel < 5) {
+        navigate(`/levels/list/${nextLevel}`);
         pauseGame();
         setTime(getTimeForLevel(nextLevel));
       } else {
         alert('Congratulations! You have completed all levels.');
-        navigate('/level/1');
-        console.log(level, '0');
+        navigate('/');
         pauseGame();
         setTime(getTimeForLevel(1));
       }
@@ -76,13 +75,13 @@ const Timer = ({
         <p>{formatTime(time)}</p>
       </div>
       <div className={styles.footer_buttons_block}>
-        <Button onClick={startGame} disabled={isGameStarted}>
+        <Button className={styles.button} onClick={startGame} disabled={isGameStarted}>
           Start Game
         </Button>
-        <Button onClick={pauseGame} disabled={!isGameStarted}>
+        <Button className={styles.button} onClick={pauseGame} disabled={!isGameStarted}>
           Pause Game
         </Button>
-        <Button onClick={resetGame} disabled={isGameStarted || flippedCards.length > 0}>
+        <Button className={styles.button} onClick={resetGame} disabled={isGameStarted || flippedCards.length > 0}>
           Reset Game
         </Button>
       </div>

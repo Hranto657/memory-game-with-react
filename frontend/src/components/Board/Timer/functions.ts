@@ -38,20 +38,14 @@ export const resetTimer = (timer: number | null, setTimer: Dispatch<SetStateActi
 export const getTimeForLevel = (level: number) => {
   switch (level) {
     case 1:
-      return 5;
-    case 2:
-      return 10;
-    case 3:
       return 20;
-    case 4:
+    case 2:
       return 120;
-    case 5:
+    case 3:
       return 180;
-    case 6:
-      return 210;
-    case 7:
+    case 4:
       return 240;
-    default:
+    case 5:
       return 300;
   }
 };

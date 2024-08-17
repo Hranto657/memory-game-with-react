@@ -1,13 +1,10 @@
 import React from 'react';
 import { ICardProps } from './types';
-import { getCardDimensions } from './functions';
 import icon from '@/assets/card-back-icon.png';
 
 import styles from './index.module.css';
 
-const Card = ({ id, image, alt, isFlipped, isMatched, onClick, level }: ICardProps) => {
-  const { width, height } = getCardDimensions(level);
-
+const Card = ({ id, image, alt, isFlipped, isMatched, onClick }: ICardProps) => {
   const handleClick = () => {
     if (!isFlipped && !isMatched) {
       onClick(id);
@@ -15,11 +12,7 @@ const Card = ({ id, image, alt, isFlipped, isMatched, onClick, level }: ICardPro
   };
 
   return (
-    <div
-      className={`${styles.card} ${isFlipped || isMatched ? styles.flipped : ''}`}
-      style={{ width, height }}
-      onClick={handleClick}
-    >
+    <div className={`${styles.card} ${isFlipped || isMatched ? styles.flipped : ''} `} onClick={handleClick}>
       <div className={styles.card_inner}>
         <div className={styles.card_front}>
           <img className={styles.card_front_img} src={image} alt={alt} />
