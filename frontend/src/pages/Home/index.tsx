@@ -10,9 +10,6 @@ export default function Home() {
   const navigate = useNavigate();
   return (
     <div>
-      <div className={styles.title}>
-        <h1>Memory Game</h1>
-      </div>
       <div className={styles.buttons_block}>
         <Button className={styles.button} onClick={() => navigate('/levels')}>
           Start
