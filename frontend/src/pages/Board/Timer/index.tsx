@@ -4,7 +4,7 @@ import { CardType } from '@/types/commonTypes';
 import { ITimerProps } from './types';
 import { formatTime } from '@/helpers/formateTime';
 import { shuffleCards } from '@/helpers/shuffleCards';
-import { getTimeForLevel, pauseTimer, resetTimer, startTimer } from './functions';
+import { getTimeForLevel } from './functions';
 import Button from '@/components/Button';
 
 import styles from './index.module.css';
@@ -23,14 +23,44 @@ const Timer = ({
   const [time, setTime] = useState(getTimeForLevel(level));
   const [timer, setTimer] = useState<number | null>(null);
 
+  const startTimer = () => {
+    if (timer) return;
+    const newTimer = setInterval(() => {
+      setTime((prevTime) => {
+        if (prevTime === 0) {
+          clearInterval(newTimer);
+          setTimer(null);
+          alert('Game Over');
+          navigate('/levels/list');
+          pauseGame();
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+    setTimer(newTimer);
+  };
+
+  const pauseTimer = () => {
+    if (timer) {
+      clearInterval(timer);
+      setTimer(null);
+    }
+  };
+
+  const resetTimer = () => {
+    if (timer) {
+      clearInterval(timer);
+      setTimer(null);
+    }
+  };
   const startGame = () => {
     setIsGameStarted(true);
-    startTimer(setTime, setTimer, timer, resetGame);
+    startTimer();
   };
 
   const pauseGame = () => {
     setIsGameStarted(false);
-    pauseTimer(timer, setTimer);
+    pauseTimer();
   };
 
   const resetGame = () => {
@@ -48,7 +78,7 @@ const Timer = ({
 
     setIsCardDisabled(false);
     setIsGameStarted(false);
-    resetTimer(timer, setTimer);
+    resetTimer();
     setTime(getTimeForLevel(level));
   };
 
@@ -65,12 +95,11 @@ const Timer = ({
         alert('Congratulations! You have completed all levels.');
         navigate('/');
         pauseGame();
-        setTime(getTimeForLevel(1));
       }
     }
   }, [matchedCards, level, navigate]);
   return (
-    <>
+    <div className={styles.main}>
       <div className={styles.timer}>
         <p>{formatTime(time)}</p>
       </div>
@@ -85,7 +114,7 @@ const Timer = ({
           Reset Game
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 

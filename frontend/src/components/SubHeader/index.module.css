@@ -1,0 +1,25 @@
+.sub_header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.title {
+  text-align: center;
+  margin-left: 20px;
+}
+.title_text {
+  color: #fff;
+  font-size: 24px;
+  margin: 0;
+}
+
+.back_button_block {
+  width: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.back_button {
+  font-size: 16px;
+  border-radius: 4px;
+}

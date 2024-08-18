@@ -12,7 +12,7 @@ const Card = ({ id, image, alt, isFlipped, isMatched, onClick }: ICardProps) => 
   };
 
   return (
-    <div className={`${styles.card} ${isFlipped || isMatched ? styles.flipped : ''} `} onClick={handleClick}>
+    <div className={`${styles.card} ${isFlipped || isMatched ? styles.flipped : ''}`} onClick={handleClick}>
       <div className={styles.card_inner}>
         <div className={styles.card_front}>
           <img className={styles.card_front_img} src={image} alt={alt} />
