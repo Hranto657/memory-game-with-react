@@ -1,16 +1,21 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { CardType } from '@/types/commonTypes';
 import { initialCards } from '@/data/initialCards';
+// import { initialCards2 } from '@/data/initialCards2';
 import { shuffleCards } from '@/helpers/shuffleCards';
 import { getRequiredMatches } from './functions';
-import Timer from '@/components/Board/Timer';
-import GameBoard from '@/components/Board/GameBoard';
+import Header from '@/components/Container/Header';
+import SubHeader from '@/components/SubHeader';
+import Timer from './Timer';
+import GameBoard from './GameBoard';
 
 import styles from './index.module.css';
 
 export default function Board() {
   const { level } = useParams();
+  const navigate = useNavigate();
+
   const [cards, setCards] = useState<CardType[]>([]);
   const [isCardDisabled, setIsCardDisabled] = useState(false);
   const [isGameStarted, setIsGameStarted] = useState(false);
@@ -64,6 +69,9 @@ export default function Board() {
 
   useEffect(() => {
     setCards(shuffleCards(getCardsForLevel(Number(level))));
+    if (Number(level) > 5) {
+      navigate('/levels/list');
+    }
   }, [level]);
 
   useEffect(() => {
@@ -108,9 +116,7 @@ export default function Board() {
 
   return (
     <div className={styles.main}>
-      <div className={styles.title}>
-        <h1>Memory Game</h1>
-      </div>
+      <SubHeader title={`Level ${level}`} path="/levels/list" />
 
       <div className={styles.header}>
         <p>Matched Pairs: {matchedCards.length / 2}</p>
