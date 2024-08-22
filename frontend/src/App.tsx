@@ -14,9 +14,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/levels" element={<Levels />} />
-          <Route path="/levels/list" element={<LevelsList />} />
-          <Route path="/levels/difficulty" element={<LevelsDifficulty />} />
-          <Route path="/levels/list/:level" element={<Board />} />
+          <Route path="/levels/difficulty/:theme" element={<LevelsDifficulty />} />
+          <Route path="/levels/list/:theme/:difficulty" element={<LevelsList />} />
+          <Route path="/levels/list/:theme/:difficulty/:level" element={<Board />} />
         </Routes>
       </Container>
     </Router>
