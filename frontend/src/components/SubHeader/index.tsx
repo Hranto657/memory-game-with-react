@@ -1,19 +1,26 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSwipeable } from 'react-swipeable';
 import { ISubHeaderProps } from './types';
 import Button from '../Button';
-
 import styles from './index.module.css';
 
 export default function SubHeader({ title, path }: ISubHeaderProps) {
   const navigate = useNavigate();
+
+  const handlers = useSwipeable({
+    onSwipedLeft: (eventData) => {
+      eventData.event.preventDefault();
+      navigate(path);
+    },
+    trackMouse: true,
+  });
+
   return (
-    <div className={styles.sub_header}>
-      <div className={styles.back_button_block}>
-        <Button className={styles.back_button} onClick={() => navigate(path)}>
-          Back
-        </Button>
-      </div>
+    <div {...handlers} className={styles.sub_header}>
+      <Button className={styles.back_button} onClick={() => navigate(path)}>
+        Back
+      </Button>
       <div className={styles.title}>
         <h1 className={styles.title_text}>{title}</h1>
       </div>

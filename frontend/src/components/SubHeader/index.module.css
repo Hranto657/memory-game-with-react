@@ -13,13 +13,9 @@
   margin: 0;
 }
 
-.back_button_block {
-  width: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .back_button {
+  width: 50px;
+  padding: 0;
   font-size: 16px;
   border-radius: 4px;
 }
