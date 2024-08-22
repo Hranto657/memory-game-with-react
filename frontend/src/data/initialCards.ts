@@ -16,7 +16,9 @@ import dragon14 from '@/assets/dragon-14.jpg';
 import dragon15 from '@/assets/dragon-15.jpg';
 import dragon16 from '@/assets/dragon-16.jpg';
 import dragon17 from '@/assets/dragon-17.jpg';
+import dragon18 from '@/assets/dragon-18.jpg';
 import joker from '@/assets/joker.jpg';
+import freeze from '@/assets/freeze.jpg';
 
 export const initialCards: CardType[] = [
   {
@@ -26,6 +28,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 2,
@@ -34,6 +37,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 3,
@@ -42,6 +46,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 4,
@@ -50,6 +55,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 5,
@@ -58,6 +64,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 6,
@@ -66,6 +73,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 7,
@@ -74,6 +82,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 8,
@@ -82,6 +91,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 9,
@@ -90,6 +100,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: true,
+    isFreeze: false,
   },
   {
     id: 10,
@@ -98,6 +109,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 11,
@@ -106,6 +118,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 12,
@@ -114,6 +127,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 13,
@@ -122,6 +136,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 14,
@@ -130,6 +145,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 15,
@@ -138,6 +154,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 16,
@@ -146,6 +163,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 17,
@@ -154,6 +172,7 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
   },
   {
     id: 18,
@@ -162,5 +181,24 @@ export const initialCards: CardType[] = [
     isFlipped: false,
     isMatched: false,
     isJoker: false,
+    isFreeze: false,
+  },
+  {
+    id: 19,
+    image: dragon18,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+    isFreeze: false,
+  },
+  {
+    id: 20,
+    image: freeze,
+    alt: 'memory game card',
+    isFlipped: false,
+    isMatched: false,
+    isJoker: false,
+    isFreeze: true,
   },
 ];

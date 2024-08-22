@@ -9,5 +9,7 @@ export interface ITimerProps {
   level: number;
   matchedCards: CardType[];
   flippedCards: number[];
-  getRequiredMatches: (level: number) => number;
+  getRequiredMatches: (level: number, difficulty: string) => number;
+  difficulty: string;
+  theme: string;
 }

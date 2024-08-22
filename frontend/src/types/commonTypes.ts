@@ -5,4 +5,5 @@ export type CardType = {
   isFlipped: boolean;
   isMatched: boolean;
   isJoker: boolean;
+  isFreeze: boolean;
 };
