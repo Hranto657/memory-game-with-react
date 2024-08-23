@@ -115,7 +115,8 @@ export default function Board() {
           setCards((prevCards) => shuffleCards(prevCards.map((card) => ({ ...card, isFlipped: false }))));
           setIsCardDisabled(false);
         }, 1000);
-      } else if (firstCard.image === secondCard.image) {
+      }
+      if (firstCard.image === secondCard.image) {
         if (firstCard.isJoker && secondCard.isJoker) {
           setIsCardDisabled(true);
           setTimeout(() => {
