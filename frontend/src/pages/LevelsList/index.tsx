@@ -1,21 +1,15 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { levelsListType } from './types';
-import SubHeader from '@/components/SubHeader';
-import Button from '@/components/Button';
+import { LevelsListType } from './types';
+import { levelsList } from './constants';
+import { Button, SubHeader } from '@/components';
 
 import styles from './index.module.css';
 
 export default function LevelsList() {
   const navigate = useNavigate();
   const { theme, difficulty } = useParams();
-  const levelsList: levelsListType[] = [
-    { id: 1, title: 'Level 1' },
-    { id: 2, title: 'Level 2' },
-    { id: 3, title: 'Level 3' },
-    { id: 4, title: 'Level 4' },
-    { id: 5, title: 'Level 5' },
-  ];
+
   const selectLevel = (id: number) => {
     if (id > 5) {
       navigate('/levels/list');
@@ -23,12 +17,13 @@ export default function LevelsList() {
       navigate(`/levels/list/${theme}/${difficulty}/${id}`);
     }
   };
+
   return (
     <>
       <SubHeader title="Level List" path={`/levels/difficulty/${theme}`} />
 
       <div className={styles.buttons_block}>
-        {levelsList.map((level: levelsListType) => (
+        {levelsList.map((level: LevelsListType) => (
           <Button key={level.id} className={styles.button} onClick={() => selectLevel(level.id)}>
             {level.title}
           </Button>

@@ -1,4 +1,4 @@
-export type levelThemesType = {
+export type LevelThemesType = {
   id: number;
   title: string;
   isAvailable: boolean;

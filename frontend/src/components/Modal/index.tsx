@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { IModalItemProps } from './types';
 import icon from '@/assets/close-icon.svg';
 
@@ -7,7 +8,7 @@ import styles from './index.module.css';
 export default function Modal({ isOpen, onClose, children }: IModalItemProps) {
   if (!isOpen) return null;
 
-  return (
+  return ReactDOM.createPortal(
     <div className={styles.modal_overlay}>
       <div className={styles.modal}>
         <div className={styles.modal_content}>
@@ -17,6 +18,7 @@ export default function Modal({ isOpen, onClose, children }: IModalItemProps) {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.getElementById('modal-root')
   );
 }
