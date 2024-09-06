@@ -1,4 +1,4 @@
-export type levelsListType = {
+export type LevelsListType = {
   id: number;
   title: string;
 };
