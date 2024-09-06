@@ -4,7 +4,7 @@ import { CardType } from '@/types/commonTypes';
 import { ITimerProps } from './types';
 import { formatTime } from '@/helpers/formateTime';
 import { shuffleCards } from '@/helpers/shuffleCards';
-import { getTimeForLevel } from './functions';
+import { getTimeForLevel, getRequiredMatches } from '../functions';
 import Button from '@/components/Button';
 
 import styles from './index.module.css';
@@ -19,7 +19,6 @@ const Timer = forwardRef(
       level,
       matchedCards,
       flippedCards,
-      getRequiredMatches,
       difficulty,
       theme,
     }: ITimerProps,
