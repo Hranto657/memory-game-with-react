@@ -2,10 +2,11 @@ import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'rea
 import { useNavigate } from 'react-router-dom';
 import { CardType } from '@/types/commonTypes';
 import { ITimerProps } from './types';
-import { formatTime } from '@/helpers/formateTime';
-import { shuffleCards } from '@/helpers/shuffleCards';
-import { getTimeForLevel, getRequiredMatches } from '../functions';
-import Button from '@/components/Button';
+import { useUser } from '@/contexts/UserContext';
+import { useUpdateUser } from '@/core/hooks/useUpdateUser';
+import { formatTime, shuffleCards } from '@/helpers';
+import { getRequiredMatches, getTimeForLevel } from '../functions';
+import { Button } from '@/components';
 
 import styles from './index.module.css';
 
@@ -25,6 +26,9 @@ const Timer = forwardRef(
     ref
   ) => {
     const navigate = useNavigate();
+    const { mutateAsync } = useUpdateUser();
+    const { user } = useUser();
+    // console.log(user);
     const [time, setTime] = useState(getTimeForLevel(level));
     const [timer, setTimer] = useState<number | null>(null);
 
@@ -101,14 +105,30 @@ const Timer = forwardRef(
       },
     }));
 
+    const updateUser = async ({ userId, updateData }: any) => {
+      const response = await mutateAsync({ userId, updateData });
+      console.log(response, 'response');
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          id: response.updatedUser._id,
+          username: response.updatedUser.username,
+          level: response.updatedUser.level,
+          count: response.updatedUser.count,
+        })
+      );
+    };
+    // console.log(user);
     useEffect(() => {
       const requiredMatches =
         difficulty === 'veryhard'
           ? getRequiredMatches(Number(level), difficulty) + 2
           : getRequiredMatches(Number(level), difficulty);
-      console.log(matchedCards.length);
+      // console.log(requiredMatches);
       if (matchedCards.length === requiredMatches) {
         alert('You win');
+        updateUser({ userId: user.id, updateData: { level: 3, count: 500 } });
+
         const nextLevel = Number(level) + 1;
         if (nextLevel <= 5) {
           navigate(`/levels/list/${theme}/${difficulty}/${nextLevel}`);

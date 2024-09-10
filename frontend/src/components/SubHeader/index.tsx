@@ -2,7 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSwipeable } from 'react-swipeable';
 import { ISubHeaderProps } from './types';
-import Button from '../Button';
+import { Button } from '@/components';
+
 import styles from './index.module.css';
 
 export default function SubHeader({ title, path }: ISubHeaderProps) {
@@ -19,7 +20,7 @@ export default function SubHeader({ title, path }: ISubHeaderProps) {
   return (
     <div {...handlers} className={styles.sub_header}>
       <Button className={styles.back_button} onClick={() => navigate(path)}>
-        Back
+        {'<'}
       </Button>
       <div className={styles.title}>
         <h1 className={styles.title_text}>{title}</h1>

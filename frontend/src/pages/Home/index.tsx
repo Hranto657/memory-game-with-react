@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '@/components/Button';
-import Login from '@/components/Login';
-import Register from '@/components/Register';
+import { useUser } from '@/contexts/UserContext';
+import { Button, Login, Logout, Register } from '@/components';
 
 import styles from './index.module.css';
 
 export default function Home() {
   const navigate = useNavigate();
+  const { user } = useUser();
   return (
     <div>
       <div className={styles.buttons_block}>
@@ -17,8 +17,14 @@ export default function Home() {
         <Button className={styles.button} onClick={() => navigate('levels/list/5')}>
           Try Game
         </Button>
-        <Login />
-        <Register />
+        {!user ? (
+          <>
+            <Login />
+            <Register />
+          </>
+        ) : (
+          <Logout />
+        )}
       </div>
     </div>
   );
