@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { FormValues } from './types';
-import Modal from '../Modal';
-import Input from '../Input';
-import Button from '../Button';
+import { useLoginUser } from '@/core/hooks/useLoginUser';
+import { useUser } from '@/contexts/UserContext';
+import { Button, Modal, Input } from '@/components';
 
 import styles from './index.module.css';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function Login() {
+  const { mutateAsync } = useLoginUser();
+  const { setUser, user } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const methods = useForm<FormValues>({ mode: 'onChange' });
   const { handleSubmit, reset } = methods;
@@ -22,14 +24,27 @@ export default function Login() {
     setIsModalOpen(false);
   };
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<{ email: string; password: string }> = async (data) => {
+    try {
+      const response = await mutateAsync({ username: data.email, password: data.password });
+      console.log('Login successful:', response);
+      if (response) {
+        const { id, username, accessToken, refreshToken, level, count } = response;
+        localStorage.setItem('user', JSON.stringify({ id, username, level, count }));
+        setUser({ id, username, level, count }, accessToken, refreshToken);
+      }
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
+
   return (
     <>
       <Button onClick={openModal} className={styles.button}>
         Login
       </Button>
+
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <h1 className={styles.title}>Login Form</h1>
         <FormProvider {...methods}>

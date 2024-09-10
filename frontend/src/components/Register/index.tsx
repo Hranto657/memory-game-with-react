@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form';
 import { FormValues } from './types';
-import Modal from '../Modal';
-import Input from '../Input';
-import Button from '../Button';
+import { useRegisterUser } from '@/core/hooks/useRegisterUser';
+import { Button, Modal, Input } from '@/components';
 
 import styles from './index.module.css';
 
@@ -12,6 +11,7 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 export default function Register() {
+  const { mutate } = useRegisterUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const methods = useForm<FormValues>({ mode: 'onChange' });
   const { handleSubmit, reset } = methods;
@@ -24,8 +24,19 @@ export default function Register() {
     setIsModalOpen(false);
   };
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+    try {
+      const response = await mutate({
+        username: data.email,
+        email: data.email,
+        password: data.password,
+        firstName: data.firstName,
+        lastName: data.lastName,
+      });
+      console.log('Registration successful:', response);
+    } catch (error) {
+      console.error('Registration failed:', error);
+    }
   };
 
   return (

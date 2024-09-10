@@ -3,4 +3,5 @@ export type FormValues = {
   lastName: string;
   email: string;
   password: string;
+  username: string;
 };
