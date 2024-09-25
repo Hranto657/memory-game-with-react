@@ -45,7 +45,7 @@ export default function Login() {
         Login
       </Button>
 
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      <Modal isOpen={isModalOpen} onClose={closeModal} isVisible={true}>
         <h1 className={styles.title}>Login Form</h1>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -72,7 +72,12 @@ export default function Login() {
 
             <div className={styles.form_button_block}>
               <input className={styles.form_button} type="submit" value="Login" />
-              <input className={styles.form_button} type="button" onClick={() => reset()} value="reset" />
+              <input
+                className={styles.form_button}
+                type="button"
+                onClick={() => reset()}
+                value="reset"
+              />
             </div>
           </form>
         </FormProvider>
