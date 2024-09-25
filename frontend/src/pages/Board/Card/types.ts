@@ -4,5 +4,4 @@ export interface ICardProps {
   alt: string;
   isFlipped: boolean;
   isMatched: boolean;
-  onClick: (id: number) => void;
 }

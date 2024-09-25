@@ -1,18 +1,18 @@
 import React from 'react';
 import { ICardProps } from './types';
+import { useGame } from '@/contexts';
 import icon from '@/assets/card-back-icon.png';
 
 import styles from './index.module.css';
 
-const Card = ({ id, image, alt, isFlipped, isMatched, onClick }: ICardProps) => {
-  const handleClick = () => {
-    if (!isFlipped && !isMatched) {
-      onClick(id);
-    }
-  };
+const Card = ({ id, image, alt, isFlipped, isMatched }: ICardProps) => {
+  const { handleCardClick } = useGame();
 
   return (
-    <div className={`${styles.card} ${isFlipped || isMatched ? styles.flipped : ''}`} onClick={handleClick}>
+    <div
+      className={`${styles.card} ${isFlipped || isMatched ? styles.flipped : ''}`}
+      onClick={() => handleCardClick(id)}
+    >
       <div className={styles.card_inner}>
         <div className={styles.card_front}>
           <img className={styles.card_front_img} src={image} alt={alt} />
