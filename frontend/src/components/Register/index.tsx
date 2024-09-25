@@ -44,7 +44,7 @@ export default function Register() {
       <Button onClick={openModal} className={styles.button}>
         Register
       </Button>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      <Modal isOpen={isModalOpen} onClose={closeModal} isVisible={true}>
         <h1 className={styles.title}>Register Form</h1>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -98,7 +98,12 @@ export default function Register() {
 
             <div className={styles.form_button_block}>
               <input className={styles.form_button} type="submit" value="submit" />
-              <input className={styles.form_button} type="button" onClick={() => reset()} value="reset" />
+              <input
+                className={styles.form_button}
+                type="button"
+                onClick={() => reset()}
+                value="reset"
+              />
             </div>
           </form>
         </FormProvider>
