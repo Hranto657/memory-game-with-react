@@ -5,8 +5,8 @@ export type UserType = {
   count: number;
 };
 
-export type UserContextType = {
+export interface UserContextType {
   user: UserType | null;
   setUser: (user: UserType, accessToken: string, refreshToken: string) => void;
   clearUser: () => void;
-};
+}

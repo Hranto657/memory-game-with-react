@@ -78,7 +78,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser: setUserWithTokens, clearUser }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, setUser: setUserWithTokens, clearUser }}>
+      {children}
+    </UserContext.Provider>
   );
 };
 
