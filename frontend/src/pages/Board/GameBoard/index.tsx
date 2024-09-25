@@ -1,10 +1,11 @@
 import React from 'react';
-import { IGameBoardProps } from './types';
+import { useGame } from '@/contexts';
 import Card from '../Card';
 
 import styles from './index.module.css';
 
-const GameBoard = ({ cards, handleCardClick }: IGameBoardProps) => {
+const GameBoard = () => {
+  const { cards } = useGame();
   return (
     <div className={styles.board}>
       {cards.map((card) => (
@@ -15,7 +16,6 @@ const GameBoard = ({ cards, handleCardClick }: IGameBoardProps) => {
           alt={card.alt}
           isFlipped={card.isFlipped}
           isMatched={card.isMatched}
-          onClick={handleCardClick}
         />
       ))}
     </div>
