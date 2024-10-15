@@ -6,12 +6,13 @@ import { shuffleCards } from '@/helpers';
 
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
-export const GameProvider: React.FC<{ children: ReactNode; level: number }> = ({
+export const GameProvider: React.FC<{ children: ReactNode; level: number; difficulty: string }> = ({
   children,
   level,
+  difficulty,
 }) => {
   const [isGameStarted, setIsGameStarted] = useState(false);
-  const [time, setTime] = useState(getTimeForLevel(Number(level)));
+  const [time, setTime] = useState(getTimeForLevel(Number(level), difficulty));
   const [cards, setCards] = useState<CardType[]>([]);
   const [isCardDisabled, setIsCardDisabled] = useState(false);
 
@@ -64,7 +65,7 @@ export const GameProvider: React.FC<{ children: ReactNode; level: number }> = ({
 
   const getNextLevelTime = () => {
     const nextLevel = Number(level) + 1;
-    setTime(getTimeForLevel(nextLevel));
+    setTime(getTimeForLevel(nextLevel, difficulty));
   };
 
   const startGame = useCallback(() => {
@@ -92,7 +93,7 @@ export const GameProvider: React.FC<{ children: ReactNode; level: number }> = ({
 
     setIsCardDisabled(false);
     setIsGameStarted(false);
-    resetTimer(timer, level, setTimer, setTime);
+    resetTimer(timer, level, difficulty, setTimer, setTime);
   }, [timer, level]);
 
   const freezeTime = useCallback(() => {
