@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { JwtPayload, jwtDecode } from 'jwt-decode';
 import tokenService from './TokenService';
-import { refreshAccessToken } from '../functions/refreshAccessToken';
+// import { refreshAccessToken } from '../functions/refreshAccessToken';
 import {
   LoginDataType,
   LoginResponseType,
@@ -29,34 +29,35 @@ const api = axios.create({
 });
 
 // Add to another file in the future
-api.interceptors.request.use(
-  async (config) => {
-    console.log('Interceptor triggered', config);
-    if (config.url.includes('/update')) {
-      let accessToken = tokenService.getAccessToken();
 
-      if (accessToken && !isTokenExpired(accessToken)) {
-        config.headers!['Authorization'] = `Bearer ${accessToken}`;
-        return config;
-      }
+// api.interceptors.request.use(
+//   async (config) => {
+//     console.log('Interceptor triggered', config);
+//     if (config.url.includes('/update')) {
+//       let accessToken = tokenService.getAccessToken();
 
-      accessToken = await refreshAccessToken();
+//       if (accessToken && !isTokenExpired(accessToken)) {
+//         config.headers!['Authorization'] = `Bearer ${accessToken}`;
+//         return config;
+//       }
 
-      if (!accessToken) {
-        tokenService.clearTokens();
-        return Promise.reject('No access token available');
-      }
+//       accessToken = await refreshAccessToken();
 
-      config.headers!['Authorization'] = `Bearer ${accessToken}`;
-    }
-    return config;
-  },
+//       if (!accessToken) {
+//         tokenService.clearTokens();
+//         return Promise.reject('No access token available');
+//       }
 
-  (error) => {
-    console.error('Interceptor error', error);
-    return Promise.reject(error);
-  }
-);
+//       config.headers!['Authorization'] = `Bearer ${accessToken}`;
+//     }
+//     return config;
+//   },
+
+//   (error) => {
+//     console.error('Interceptor error', error);
+//     return Promise.reject(error);
+//   }
+// );
 
 const userApiService = {
   loginUser: async (loginData: LoginDataType): Promise<LoginResponseType> => {
@@ -69,7 +70,10 @@ const userApiService = {
     return response.data;
   },
 
-  updateUser: async ({ userId, updateData }: UpdateUserVariablesType): Promise<UpdateUserResponseType> => {
+  updateUser: async ({
+    userId,
+    updateData,
+  }: UpdateUserVariablesType): Promise<UpdateUserResponseType> => {
     const response = await api.put(`/update/${userId}`, updateData);
     return response.data;
   },

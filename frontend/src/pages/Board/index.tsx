@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGame, useUser } from '@/contexts';
-import { useUpdateUser } from '@/core/hooks/useUpdateUser';
+import { useGame } from '@/contexts';
 import { CardType } from '@/types/commonTypes';
 import { shuffleCards } from '@/helpers';
 import { getCardsForLevel, getRequiredMatches } from './functions';
@@ -30,9 +29,6 @@ export default function Board() {
     getNextLevelTime,
   } = useGame();
 
-  const { user } = useUser();
-  const { mutateAsync } = useUpdateUser();
-
   const nextLevel = Number(level) + 1;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,25 +39,10 @@ export default function Board() {
 
   const [isFreezeActive, setIsFreezeActive] = useState(false);
 
-  const updateUser = async ({ userId, updateData }: any) => {
-    const response = await mutateAsync({ userId, updateData });
-    console.log(response, 'response');
-    localStorage.setItem(
-      'user',
-      JSON.stringify({
-        id: response.updatedUser._id,
-        username: response.updatedUser.username,
-        level: response.updatedUser.level,
-        count: response.updatedUser.count,
-      })
-    );
-  };
-
   const onNextLevel = useCallback(() => {
     resetFlippedCards();
     resetMatchedCards();
     shuffleAndReset();
-    // updateUser({ userId: user.id, updateData: { count: 500 } });
     setTimeout(() => {
       navigate(`/levels/list/${theme}/${difficulty}/${nextLevel}`);
     });
