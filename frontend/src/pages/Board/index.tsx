@@ -5,6 +5,7 @@ import { CardType } from '@/types/commonTypes';
 import { shuffleCards } from '@/helpers';
 import { getCardsForLevel, getRequiredMatches } from './functions';
 import { SubHeader } from '@/components';
+import Header from './Header';
 import Timer from './Timer';
 import GameBoard from './GameBoard';
 import WinModal from './WinModal';
@@ -44,7 +45,7 @@ export default function Board() {
     resetMatchedCards();
     shuffleAndReset();
     setTimeout(() => {
-      navigate(`/levels/list/${theme}/${difficulty}/${nextLevel}`);
+      navigate(`/${theme}/${difficulty}/${nextLevel}`);
     });
     if (difficulty !== 'easy') {
       getNextLevelTime();
@@ -56,7 +57,7 @@ export default function Board() {
     setCards(shuffleCards(getCardsForLevel(Number(level), difficulty, theme)));
 
     if (Number(level) > 5) {
-      navigate('/levels/list');
+      navigate('/');
     }
   }, [level, theme, difficulty]);
 
@@ -128,14 +129,12 @@ export default function Board() {
       }
     }
   }, [matchedCards, level]);
+
   return (
     <div className={styles.main}>
-      <SubHeader title={`Level ${level}`} path={`/levels/list/${theme}/${difficulty}`} />
+      <SubHeader title={`Level ${level}`} path={`/${theme}/${difficulty}`} />
 
-      <div className={styles.header}>
-        <p>Matched Pairs: {matchedCards.length / 2}</p>
-        <p>Score: 0</p>
-      </div>
+      <Header />
 
       <GameBoard />
       <Timer />

@@ -25,10 +25,7 @@ const WinModal = ({ isModalOpen, closeModal, nextLevel, onNextLevel }: IWinModal
         <>
           <h1>You Win</h1>
           <div className={styles.buttons_block}>
-            <Button
-              className={styles.button}
-              onClick={() => navigate(`/levels/list/${theme}/${difficulty}/`)}
-            >
+            <Button className={styles.button} onClick={() => navigate(`/${theme}/${difficulty}/`)}>
               Back to List
             </Button>
             <Button className={styles.button} onClick={() => onNextLevel()}>

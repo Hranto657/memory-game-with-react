@@ -10,11 +10,11 @@ export default function LevelsDifficulty() {
   const navigate = useNavigate();
   const { theme } = useParams();
   const onSelectDifficulty = (difficulty: string) => {
-    navigate(`/levels/list/${theme}/${difficulty.toLowerCase()}`);
+    navigate(`/${theme}/${difficulty.toLowerCase()}`);
   };
   return (
     <>
-      <SubHeader title="Level Difficulty" path={`/levels`} />
+      <SubHeader title="Level Difficulty" path={`/`} />
       <div className={styles.buttons_block}>
         {levelsDifficulty.map((levelDifficulty: LevelsDifficultyType) => (
           <Button
