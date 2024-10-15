@@ -12,15 +12,15 @@ export default function LevelsList() {
 
   const selectLevel = (id: number) => {
     if (id > 5) {
-      navigate('/levels/list');
+      navigate('/');
     } else {
-      navigate(`/levels/list/${theme}/${difficulty}/${id}`);
+      navigate(`/${theme}/${difficulty}/${id}`);
     }
   };
 
   return (
     <>
-      <SubHeader title="Level List" path={`/levels/difficulty/${theme}`} />
+      <SubHeader title="Level List" path={`/${theme}`} />
 
       <div className={styles.buttons_block}>
         {levelsList.map((level: LevelsListType) => (
