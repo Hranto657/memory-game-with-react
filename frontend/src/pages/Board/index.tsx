@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGame } from '@/contexts';
+import { useGame, useUser } from '@/contexts';
+import { useUpdateUser } from '@/core/hooks/useUpdateUser';
 import { CardType } from '@/types/commonTypes';
 import { shuffleCards } from '@/helpers';
-import { getCardsForLevel } from './functions';
+import { getCardsForLevel, getRequiredMatches } from './functions';
 import { SubHeader } from '@/components';
 import Timer from './Timer';
 import GameBoard from './GameBoard';
+import WinModal from './WinModal';
 
 import styles from './index.module.css';
 
@@ -24,9 +26,50 @@ export default function Board() {
     resetFlippedCards,
     resetMatchedCards,
     shuffleAndReset,
+    pauseGame,
+    getNextLevelTime,
   } = useGame();
 
+  const { user } = useUser();
+  const { mutateAsync } = useUpdateUser();
+
+  const nextLevel = Number(level) + 1;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const [isFreezeActive, setIsFreezeActive] = useState(false);
+
+  const updateUser = async ({ userId, updateData }: any) => {
+    const response = await mutateAsync({ userId, updateData });
+    console.log(response, 'response');
+    localStorage.setItem(
+      'user',
+      JSON.stringify({
+        id: response.updatedUser._id,
+        username: response.updatedUser.username,
+        level: response.updatedUser.level,
+        count: response.updatedUser.count,
+      })
+    );
+  };
+
+  const onNextLevel = useCallback(() => {
+    resetFlippedCards();
+    resetMatchedCards();
+    shuffleAndReset();
+    // updateUser({ userId: user.id, updateData: { count: 500 } });
+    setTimeout(() => {
+      navigate(`/levels/list/${theme}/${difficulty}/${nextLevel}`);
+    });
+    if (difficulty !== 'easy') {
+      getNextLevelTime();
+    }
+    setIsModalOpen(false);
+  }, [isModalOpen]);
 
   useEffect(() => {
     setCards(shuffleCards(getCardsForLevel(Number(level), difficulty, theme)));
@@ -92,6 +135,18 @@ export default function Board() {
     }
   }, [flippedCards, isFreezeActive]);
 
+  useEffect(() => {
+    const requiredMatches =
+      difficulty === 'veryhard'
+        ? getRequiredMatches(Number(level), difficulty) + 2
+        : getRequiredMatches(Number(level), difficulty);
+    if (matchedCards.length === requiredMatches) {
+      setIsModalOpen(true);
+      if (difficulty !== 'easy') {
+        pauseGame();
+      }
+    }
+  }, [matchedCards, level]);
   return (
     <div className={styles.main}>
       <SubHeader title={`Level ${level}`} path={`/levels/list/${theme}/${difficulty}`} />
@@ -103,6 +158,13 @@ export default function Board() {
 
       <GameBoard />
       <Timer />
+
+      <WinModal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        nextLevel={nextLevel}
+        onNextLevel={onNextLevel}
+      />
     </div>
   );
 }
