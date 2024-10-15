@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // import { JwtPayload, jwtDecode } from 'jwt-decode';
 import { UserContextType, UserType } from './types';
 import tokenService from '@/core/services/TokenService';
-import { refreshAccessToken } from '@/core/functions/refreshAccessToken';
+// import { refreshAccessToken } from '@/core/functions/refreshAccessToken';
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
@@ -23,7 +23,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
 
   const setUserWithTokens = (user: UserType, accessToken: string, refreshToken: string) => {
-    // console.log('SETUSERWITHTOKENS');
     tokenService.saveTokens(accessToken, refreshToken);
     setUser(user);
   };
@@ -61,15 +60,15 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       //   clearUser();
       // }
     } else if (refreshToken && !accessToken) {
-      refreshAccessToken().then(({ accessToken, newRefreshToken }) => {
-        // console.log('ELSEIF 2');
-        if (accessToken) {
-          const user = JSON.parse(storedUser || '{}');
-          setUserWithTokens(user, accessToken, newRefreshToken);
-        } else {
-          clearUser();
-        }
-      });
+      // refreshAccessToken().then(({ accessToken, newRefreshToken }) => {
+      //   // console.log('ELSEIF 2');
+      //   if (accessToken) {
+      //     const user = JSON.parse(storedUser || '{}');
+      //     setUserWithTokens(user, accessToken, newRefreshToken);
+      //   } else {
+      //     clearUser();
+      //   }
+      // });
     } else {
       // console.log('ELSE');
       clearUser();
