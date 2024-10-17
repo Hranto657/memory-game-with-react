@@ -16,6 +16,7 @@
   "devDependencies": {
     "@tanstack/react-query": "^5.52.2",
     "@types/css-modules": "^1.0.5",
+    "@types/howler": "^2.2.12",
     "@types/js-cookie": "^3.0.6",
     "@types/jwt-decode": "^3.1.0",
     "@types/react": "^18.3.3",
@@ -27,6 +28,7 @@
     "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "howler": "^2.2.4",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "prettier": "3.3.3",
