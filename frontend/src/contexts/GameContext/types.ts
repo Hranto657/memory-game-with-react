@@ -12,6 +12,7 @@ export interface GameContextType {
   resetMatchedCards: () => void;
   shuffleAndReset: () => void;
   getNextLevelTime: () => void;
+  getCurrentLevelTime: () => void;
   time: number;
   cards: CardType[];
   setCards: React.Dispatch<React.SetStateAction<CardType[]>>;

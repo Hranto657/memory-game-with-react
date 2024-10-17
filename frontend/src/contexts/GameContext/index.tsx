@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, ReactNode, useMemo, useCallback } from 'react';
+import { Howl, Howler } from 'howler';
 import { GameContextType } from './types';
 import { CardType } from '@/types/commonTypes';
 import { getTimeForLevel, pauseTimer, resetTimer, startTimer } from './functions';
@@ -24,8 +25,13 @@ export const GameProvider: React.FC<{ children: ReactNode; level: number; diffic
   );
   const matchedCards = useMemo(() => cards.filter((card) => card.isMatched), [cards]);
 
+  const clickSound = new Howl({
+    src: ['/sounds/click.wav'],
+  });
+
   const handleCardClick = useCallback(
     (id: number) => {
+      clickSound.play();
       if (
         isCardDisabled ||
         flippedCards.includes(id) ||
@@ -66,6 +72,10 @@ export const GameProvider: React.FC<{ children: ReactNode; level: number; diffic
   const getNextLevelTime = () => {
     const nextLevel = Number(level) + 1;
     setTime(getTimeForLevel(nextLevel, difficulty));
+  };
+
+  const getCurrentLevelTime = () => {
+    setTime(getTimeForLevel(level, difficulty));
   };
 
   const startGame = useCallback(() => {
@@ -117,6 +127,7 @@ export const GameProvider: React.FC<{ children: ReactNode; level: number; diffic
         resetGame,
         freezeTime,
         getNextLevelTime,
+        getCurrentLevelTime,
         time,
         cards,
         setCards,
