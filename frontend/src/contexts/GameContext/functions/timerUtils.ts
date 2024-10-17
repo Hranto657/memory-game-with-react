@@ -14,7 +14,6 @@ export function startTimer(
       if (prevTime <= 0) {
         clearInterval(newTimer);
         setTimer(null);
-        alert('Time is up!');
         return 0;
       }
       return prevTime - 1;

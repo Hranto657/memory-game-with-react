@@ -1,3 +1,4 @@
-export { getRequiredMatches } from '../functions/getRequiredMatches';
-export { getCardsData } from '../functions/getCardsData';
-export { getCardsForLevel } from '../functions/getCardsForLevel';
+export { getRequiredMatches } from './getRequiredMatches';
+export { getCardsData } from './getCardsData';
+export { getCardsForLevel } from './getCardsForLevel';
+export { getBackgroundMusicPath } from './getBackgroundMusicPath';
