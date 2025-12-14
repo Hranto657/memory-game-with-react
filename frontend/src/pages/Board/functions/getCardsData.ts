@@ -1,10 +1,12 @@
-import { initialCards, initialCards2 } from '@/data';
+import { initialCards, initialCards2, createInitialCards, createInitialCards2 } from '@/data';
 
 export const getCardsData = (theme: string) => {
   switch (theme) {
     case 'dragon':
-      return initialCards;
+      return createInitialCards();
     case 'mythical':
-      return initialCards2;
+      return createInitialCards2();
+    default:
+      return theme === 'dragon' ? initialCards : initialCards2;
   }
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { ICardProps } from './types';
 import { useGame } from '@/contexts';
+import { getImageSource } from '@/helpers';
 import icon from '@/assets/card-back-icon.png';
 
 import styles from './index.module.css';
@@ -18,7 +19,7 @@ const Card = ({ id, image, alt, isFlipped, isMatched }: ICardProps) => {
           <img className={styles.card_front_img} src={image} alt={alt} />
         </div>
         <div className={styles.card_back}>
-          <img className={styles.card_back_img} src={icon} alt="Card Back Icon" />
+          <img className={styles.card_back_img} src={getImageSource(icon)} alt="Card Back Icon" />
         </div>
       </div>
     </div>

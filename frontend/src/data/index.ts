@@ -1,2 +1,2 @@
-export { initialCards } from './initialCards';
-export { initialCards2 } from './initialCards2';
+export { initialCards, createInitialCards } from './initialCards';
+export { initialCards2, createInitialCards2 } from './initialCards2';
